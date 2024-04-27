@@ -25,40 +25,62 @@ UDP sering digunakan untuk aplikasi yang memerlukan komunikasi yang cepat dan ef
 
 # PENJELASAN CODINGAN
 # 1. Server
+![Screenshot 2024-04-27 060553](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/56e5b6b2-7d4e-4ebb-96f1-b7aef7281206)
 
 Pertama, mengimpor modul *socket* yang memungkinkan kita untuk menggunakan fungsi-fungsi yang diperlukan untuk membuat dan mengelola socket di Python. Disini saya juga mengimpor modul *random* dan *time*. Modul *random* digunakan untuk memilih kata warna secara acak, sedangkan modul *time* digunakan untuk mengatur waktu antara pengiriman kata warna kepada klien.
 
+![Screenshot 2024-04-27 064334](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/1b9a945e-086d-40d7-824e-633b8c19f431)
+
 Selanjutnya ada *COLOR_TRANSLATION* ini adalah kamus yang berisi daftar kata warna dalam bahasa Inggris dan terjemahannya dalam bahasa Indonesia. Kamus ini akan digunakan oleh server untuk memeriksa jawaban yang diberikan oleh klien.
+
+![Screenshot 2024-04-27 075435](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/71a3f5d7-4b4b-48e5-be75-095b4ec10881)
 
 Fungsi dari codingan diatas adalah untuk mengirim pesan kepada semua klien yang terhubung ke server. Fungsi ini menerima socket server, pesan yang akan dikirim, dan daftar alamat klien yang terhubung.
 
+![Screenshot 2024-04-27 064404](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/61dafd9f-e79c-4b5a-bf70-0881701e6bd1)
+
 codingan berikutnya yang ada diatas digunakan untuk menerima pesan dari klien. Fungsi ini menerima socket server dan mengembalikan pesan yang diterima beserta alamat klien yang mengirim pesan.
+
+![Screenshot 2024-04-27 064534](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/212f975e-a787-4eef-9d11-d78266a6e1bb)
 
 Berikutnya dan yang terakhir untuk server, ada Fungsi utama yang menjalankan logika permainan server. Ini menciptakan socket UDP, mengikatnya ke alamat localhost pada port 12345, dan kemudian mulai menunggu koneksi dari klien. Setelah klien terhubung, server mengirimkan kata warna dalam bahasa Inggris kepada semua klien, menerima jawaban dari klien, memeriksa jawaban yang diberikan, dan memberikan umpan balik kepada klien. Selain itu, server juga memeriksa apakah ada klien baru yang ingin terhubung dan menambahkannya ke dalam daftar klien yang terhubung. Proses ini berlangsung secara berulang dengan interval waktu tertentu menggunakan fungsi *time.sleep(10)*.
 
 # 2. Client
+![Screenshot 2024-04-27 064808](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/f72814e8-001e-4592-ab12-a6922729486a)
 
 Kode ini dimulai dengan mengimpor modul socket, yang akan digunakan untuk membuat dan mengelola koneksi jaringan.
 
 __Receive from server__
 
+![Screenshot 2024-04-27 064830](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/948600f0-5b97-4910-a917-0c6715502741)
+
 Ini adalah fungsi yang digunakan untuk menerima pesan dari server. Fungsi ini mengambil socket klien sebagai argumen dan menerima pesan dari server menggunakan metode recvfrom(). Panjang maksimum pesan yang dapat diterima adalah 1024 byte.
 
 __Send response to server__
+
+![Screenshot 2024-04-27 064912](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/279d5981-0f19-4b66-8f60-06844cef69ea)
 
 Fungsi ini mengirimkan jawaban dari klien ke server. Ini menerima socket klien dan jawaban yang akan dikirim sebagai argumen, kemudian mengirimnya ke alamat server yang telah ditentukan.
 
 __Inisialisasi Socket UDP__
 
+![Screenshot 2024-04-27 065000](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/7001452c-4fb2-4773-afd2-0907180c576e)
+
 Di sini, socket UDP untuk klien diinisialisasi menggunakan *socket.socket()*. Parameter *socket.AF_INET* menunjukkan bahwa klien akan menggunakan alamat IP versi 4 dan *socket.SOCK_DGRAM* menunjukkan bahwa klien akan menggunakan protokol UDP.
 
 __Alamat Server__
+
+![Screenshot 2024-04-27 065024](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/e11ef84b-5274-4ae8-b2ce-681b6962204e)
 
 Ini adalah alamat server yang akan dihubungi oleh klien. Dalam hal ini, server berjalan pada localhost (mesin yang sama dengan klien) dan port 12345.
 
 __Membangun koneksi dengan server__
 
+![Screenshot 2024-04-27 065108](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/352bb9f4-168a-4ab7-b968-f1eb9f95404d)
+
 Klien mengirim pesan "connect" ke server menggunakan metode sendto() socket UDP.
+
+![Screenshot 2024-04-27 065151](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/464af627-ed89-4a0e-b24a-f39b94697ea2)
 
 Pada kode di atas, terdapat logika untuk mengirim pesan *"connect"* ke server saat klien pertama kali terhubung. Ini bertindak sebagai tanda bahwa klien telah terhubung ke server dan siap untuk bermain. Setelah itu, klien memasuki loop utama yang akan terus berjalan hingga klien dihentikan. Pada setiap iterasi loop, klien menerima kata warna dari server, meminta input dari pengguna untuk menebak warna dalam bahasa Indonesia, mengirimkan jawaban ke server, dan menerima umpan balik dari server.
 
@@ -66,9 +88,12 @@ Jika jawaban yang diberikan oleh klien benar, skor diatur menjadi 100. Namun, ke
 
 __Penanganan Exception__
 
+![Screenshot 2024-04-27 065215](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/76919d0b-a592-43b5-b10b-2314725cb7df)
+
 Bagian ini menangani penutupan koneksi dan membersihkan sumber daya saat klien dihentikan, baik karena pengguna menekan Ctrl+C atau ada kesalahan lain.
 
 # 3. Output
+![Screenshot 2024-04-27 050956](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/ffc020ef-380f-4711-b4bf-5548159d92bc)
 
 Untuk outputnya jika server telah memilih kata warna "red" dan mengirimkannya ke klien, klien mungkin akan menerima pesan "Received color: red". Klien kemudian dapat memasukkan jawaban yang benar atau salah, dan server akan memberikan umpan balik sesuai dengan jawaban tersebut.
 
