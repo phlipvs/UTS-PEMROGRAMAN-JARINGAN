@@ -27,11 +27,11 @@ UDP sering digunakan untuk aplikasi yang memerlukan komunikasi yang cepat dan ef
 # 1. Server
 ![Screenshot 2024-04-27 060553](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/56e5b6b2-7d4e-4ebb-96f1-b7aef7281206)
 
-Pertama, mengimpor modul *socket* yang memungkinkan kita untuk menggunakan fungsi-fungsi yang diperlukan untuk membuat dan mengelola socket di Python. Disini saya juga mengimpor modul *random* dan *time*. Modul *random* digunakan untuk memilih kata warna secara acak, sedangkan modul *time* digunakan untuk mengatur waktu antara pengiriman kata warna kepada klien.
+Pertama, mengimpor modul `socket` yang memungkinkan kita untuk menggunakan fungsi-fungsi yang diperlukan untuk membuat dan mengelola socket di Python. Disini saya juga mengimpor modul `random` dan `time`. Modul `random` digunakan untuk memilih kata warna secara acak, sedangkan modul `time` digunakan untuk mengatur waktu antara pengiriman kata warna kepada klien.
 
 ![Screenshot 2024-04-27 064334](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/1b9a945e-086d-40d7-824e-633b8c19f431)
 
-Selanjutnya ada *COLOR_TRANSLATION* ini adalah kamus yang berisi daftar kata warna dalam bahasa Inggris dan terjemahannya dalam bahasa Indonesia. Kamus ini akan digunakan oleh server untuk memeriksa jawaban yang diberikan oleh klien.
+Selanjutnya ada `COLOR_TRANSLATION` ini adalah kamus yang berisi daftar kata warna dalam bahasa Inggris dan terjemahannya dalam bahasa Indonesia. Kamus ini akan digunakan oleh server untuk memeriksa jawaban yang diberikan oleh klien.
 
 ![Screenshot 2024-04-27 075435](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/71a3f5d7-4b4b-48e5-be75-095b4ec10881)
 
@@ -43,7 +43,7 @@ codingan berikutnya yang ada diatas digunakan untuk menerima pesan dari klien. F
 
 ![Screenshot 2024-04-27 064534](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/212f975e-a787-4eef-9d11-d78266a6e1bb)
 
-Berikutnya dan yang terakhir untuk server, ada Fungsi utama yang menjalankan logika permainan server. Ini menciptakan socket UDP, mengikatnya ke alamat localhost pada port 12345, dan kemudian mulai menunggu koneksi dari klien. Setelah klien terhubung, server mengirimkan kata warna dalam bahasa Inggris kepada semua klien, menerima jawaban dari klien, memeriksa jawaban yang diberikan, dan memberikan umpan balik kepada klien. Selain itu, server juga memeriksa apakah ada klien baru yang ingin terhubung dan menambahkannya ke dalam daftar klien yang terhubung. Proses ini berlangsung secara berulang dengan interval waktu tertentu menggunakan fungsi *time.sleep(10)*.
+Berikutnya dan yang terakhir untuk server, ada Fungsi utama yang menjalankan logika permainan server. Ini menciptakan socket UDP, mengikatnya ke alamat localhost pada port 12345, dan kemudian mulai menunggu koneksi dari klien. Setelah klien terhubung, server mengirimkan kata warna dalam bahasa Inggris kepada semua klien, menerima jawaban dari klien, memeriksa jawaban yang diberikan, dan memberikan umpan balik kepada klien. Selain itu, server juga memeriksa apakah ada klien baru yang ingin terhubung dan menambahkannya ke dalam daftar klien yang terhubung. Proses ini berlangsung secara berulang dengan interval waktu tertentu menggunakan fungsi `time.sleep(10)`.
 
 # 2. Client
 ![Screenshot 2024-04-27 064808](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/f72814e8-001e-4592-ab12-a6922729486a)
@@ -66,7 +66,7 @@ __Inisialisasi Socket UDP__
 
 ![Screenshot 2024-04-27 065000](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/7001452c-4fb2-4773-afd2-0907180c576e)
 
-Di sini, socket UDP untuk klien diinisialisasi menggunakan *socket.socket()*. Parameter *socket.AF_INET* menunjukkan bahwa klien akan menggunakan alamat IP versi 4 dan *socket.SOCK_DGRAM* menunjukkan bahwa klien akan menggunakan protokol UDP.
+Di sini, socket UDP untuk klien diinisialisasi menggunakan `socket.socket()`. Parameter `socket.AF_INET` menunjukkan bahwa klien akan menggunakan alamat IP versi 4 dan `socket.SOCK_DGRAM` menunjukkan bahwa klien akan menggunakan protokol UDP.
 
 __Alamat Server__
 
@@ -82,7 +82,7 @@ Klien mengirim pesan "connect" ke server menggunakan metode sendto() socket UDP.
 
 ![Screenshot 2024-04-27 065151](https://github.com/phlipvs/UTS-PEMROGRAMAN-JARINGAN/assets/150348543/464af627-ed89-4a0e-b24a-f39b94697ea2)
 
-Pada kode di atas, terdapat logika untuk mengirim pesan *"connect"* ke server saat klien pertama kali terhubung. Ini bertindak sebagai tanda bahwa klien telah terhubung ke server dan siap untuk bermain. Setelah itu, klien memasuki loop utama yang akan terus berjalan hingga klien dihentikan. Pada setiap iterasi loop, klien menerima kata warna dari server, meminta input dari pengguna untuk menebak warna dalam bahasa Indonesia, mengirimkan jawaban ke server, dan menerima umpan balik dari server.
+Pada kode di atas, terdapat logika untuk mengirim pesan `"connect"` ke server saat klien pertama kali terhubung. Ini bertindak sebagai tanda bahwa klien telah terhubung ke server dan siap untuk bermain. Setelah itu, klien memasuki loop utama yang akan terus berjalan hingga klien dihentikan. Pada setiap iterasi loop, klien menerima kata warna dari server, meminta input dari pengguna untuk menebak warna dalam bahasa Indonesia, mengirimkan jawaban ke server, dan menerima umpan balik dari server.
 
 Jika jawaban yang diberikan oleh klien benar, skor diatur menjadi 100. Namun, ketika jawaban salah maka akan diberikan skor 0 Jika ingin menjaga skor klien dan hanya mengatur ulang skor ketika klien baru mulai bermain.
 
